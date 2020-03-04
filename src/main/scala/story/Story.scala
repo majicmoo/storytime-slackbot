@@ -14,14 +14,10 @@ case class NounAndActions(
     listen: Option[StoryNode] = None
 )
 
-sealed class StoryNode(val statement: String)
+sealed trait StoryNode
 
-case class DeathNode(override val statement: String)
-    extends StoryNode(statement)
-case class WinNode(override val statement: String) extends StoryNode(statement)
-case class NormalNode(
-    override val statement: String,
-    stuffToDo: List[NounAndActions] = Nil
-) extends StoryNode(statement)
+case class DeathNode(val statement: String) extends StoryNode
+case class WinNode(val statement: String) extends StoryNode
+case class NormalNode(val statement: String, stuffToDo: List[NounAndActions] = Nil) extends StoryNode
 
 case class Story(name: String, startNode: NormalNode)
