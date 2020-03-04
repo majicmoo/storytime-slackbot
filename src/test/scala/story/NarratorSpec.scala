@@ -71,4 +71,11 @@ class NarratorSpec extends FlatSpec with Matchers {
     narrator.input("could you repeat?") shouldEqual "Hello there"
   }
 
+  "look around" should "provide some information about the current state" in {
+    val narrator = new Narrator(story)
+    narrator.input("look around") shouldEqual "You can see a book and a fork."
+    narrator.input("touch book")
+    narrator.input("look around") shouldEqual "You can see an arm."
+  }
+
 }

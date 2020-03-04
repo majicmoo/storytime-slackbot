@@ -31,7 +31,7 @@ class Narrator(val story: Story) {
 
     nextNodeOpt
       .map(handleStoryNodes(_))
-      .getOrElse(s"You can't do that to a ${noun.item}.")
+      .getOrElse(s"You can't do that to ${aOrAn(noun.item)} ${noun.item}.")
   }
 
   private def handleStoryNodes(node: StoryNode): String =
@@ -58,10 +58,21 @@ class Narrator(val story: Story) {
 
   private def handleNoMatches(response: String) =
     response match {
-      case "help"          => "You need help?"
-      case RepeatPattern() => this.currentNode.statement
-      case _               => "I don't understand"
+      case "help"              => "You need help?"
+      case RepeatPattern()     => this.currentNode.statement
+      case LookAroundPattern() => lookAroundDescription()
+      case _                   => "I don't understand"
     }
+
+  private def lookAroundDescription(): String = {
+    val items =
+      this.currentNode.stuffToDo.map(stuff => s"${aOrAn(stuff.item)} ${stuff.item}").mkString(" and ")
+    s"You can see $items."
+  }
+
+  private val vowels = "aeiou"
+  private def aOrAn(word: String): String =
+    if (word.headOption.map(vowels.contains(_)).getOrElse(false)) "an" else "a"
 
   private def findVerb(words: List[String]): Option[Verb] =
     Verbs.values.find(verb => words.contains(verb.toString()))
@@ -70,4 +81,5 @@ class Narrator(val story: Story) {
     this.currentNode.stuffToDo.find(stuffToDo => words.contains(stuffToDo.item))
 
   private val RepeatPattern = "(?:.*)?could you repeat(?:.*)?".r
+  private val LookAroundPattern = "(?:.*)?look around(?:.*)?".r
 }
