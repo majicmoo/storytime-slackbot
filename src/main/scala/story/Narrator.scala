@@ -3,7 +3,7 @@ package story
 import Verbs._
 
 class Narrator(val story: Story) {
-  private val currentNode = story.startNode
+  private val currentNode: NormalNode = story.startNode
   def start(): String = story.startNode.statement
 
   def input(response: String): String = {
@@ -26,7 +26,12 @@ class Narrator(val story: Story) {
       case Verbs.look   => noun.look
       case Verbs.listen => noun.listen
     }
-    nextNode.map(_.statement).getOrElse("What do you think you are doing?")
+    nextNode match {
+      case Some(NormalNode(statement, _)) => statement
+      case Some(DeathNode(statement))     => s"$statement You died! x_x"
+      case Some(WinNode(statement))       => s"$statement You won! °˖✧◝(⁰▿⁰)◜✧˖°"
+      case _                              => s"You can't do that to a ${noun.item}."
+    }
   }
 
   private def handleNoMatches(response: String) =
@@ -38,8 +43,7 @@ class Narrator(val story: Story) {
   private def findVerb(words: List[String]): Option[Verb] =
     Verbs.values.find(verb => words.contains(verb.toString()))
 
-  private def findNoun(words: List[String]): Option[NounAndActions] = {
-    this.currentNode.stuffToDo.headOption
-  }
+  private def findNoun(words: List[String]): Option[NounAndActions] =
+    this.currentNode.stuffToDo.find(stuffToDo => words.contains(stuffToDo.item))
 
 }
