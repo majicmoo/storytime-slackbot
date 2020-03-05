@@ -20,4 +20,4 @@ case class DeathNode(val statement: String) extends StoryNode
 case class WinNode(val statement: String) extends StoryNode
 case class NormalNode(val statement: String, stuffToDo: List[NounAndActions] = Nil) extends StoryNode
 
-case class Story(name: String, startNode: NormalNode)
+case class Story(title: String, startNode: NormalNode)

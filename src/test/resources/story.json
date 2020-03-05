@@ -1,0 +1,22 @@
+{
+    "title": "A Story",
+    "nodes": [
+        {
+            "id": "node-1",
+            "statement": "Hello there",
+            "options": ["option-1"],
+            "type": "Normal"
+        },
+        {
+            "id": "node-2",
+            "statement": "The book bites you. Your arm is now bleeding.",
+            "options": ["option-3"],
+            "type": "Normal"
+        }
+    ],
+    "options": [{
+        "id": "option-1",
+        "item": "book",
+        "touch": "node-2"
+    }]
+}

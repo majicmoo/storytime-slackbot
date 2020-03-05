@@ -10,7 +10,7 @@ lazy val root = (project in file("."))
     name := "storytime-slackbot",
     libraryDependencies += scalaTest % Test
   )
-
+libraryDependencies += "com.typesafe.play" %% "play-json" % "2.8.1"
 // Uncomment the following for publishing to Sonatype.
 // See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for more detail.
 
