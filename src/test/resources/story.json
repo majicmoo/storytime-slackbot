@@ -1,22 +1,60 @@
 {
-    "title": "A Story",
-    "nodes": [
-        {
-            "id": "node-1",
-            "statement": "Hello there",
-            "options": ["option-1"],
-            "type": "Normal"
-        },
-        {
-            "id": "node-2",
-            "statement": "The book bites you. Your arm is now bleeding.",
-            "options": ["option-3"],
-            "type": "Normal"
-        }
-    ],
-    "options": [{
-        "id": "option-1",
-        "item": "book",
-        "touch": "node-2"
-    }]
+  "title": "A Story",
+  "nodes": [
+    {
+      "id": "node-1",
+      "statement": "Hello there",
+      "optionIds": ["option-1", "option-2"],
+      "type": "Normal"
+    },
+    {
+      "id": "node-2",
+      "statement": "The book bites you. Your arm is now bleeding.",
+      "optionIds": ["option-3"],
+      "type": "Normal"
+    },
+    {
+      "id": "node-3",
+      "statement": "Its bleeding... badly. Its not looking good.",
+      "type": "Death",
+      "optionIds": []
+    },
+    {
+      "id": "node-4",
+      "statement": "The book sniffs you back. You step back in shock and fall down some conveniently placed stairs.",
+      "type": "Death",
+      "optionIds": []
+    },
+    {
+      "id": "node-5",
+      "statement": "Its pointy.",
+      "type": "Normal",
+      "optionIds": ["option-1"]
+    },
+    {
+      "id": "node-6",
+      "statement": "You found the magic fork! And ate it! You are now a cutlery wizard.",
+      "type": "Win",
+      "optionIds": []
+    }
+  ],
+  "options": [
+    {
+      "id": "option-1",
+      "item": "book",
+      "touchId": "node-2",
+      "smellId": "node-4"
+    },
+    {
+      "id": "option-2",
+      "item": "fork",
+      "touchId": "node-5",
+      "tasteId": "node-6"
+    },
+    {
+      "id": "option-3",
+      "item": "arm",
+      "lookId": "node-3"
+    }
+  ]
 }
