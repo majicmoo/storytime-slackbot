@@ -1,6 +1,7 @@
 package story
 
 import Verbs._
+import Formatter._
 
 class Narrator(val story: Story) {
   private var currentNode: NormalNode = story.startNode
@@ -69,10 +70,6 @@ class Narrator(val story: Story) {
       this.currentNode.stuffToDo.map(stuff => s"${aOrAn(stuff.item)} ${stuff.item}").mkString(" and ")
     s"You can see $items."
   }
-
-  private val vowels = "aeiou"
-  private def aOrAn(word: String): String =
-    if (word.headOption.map(vowels.contains(_)).getOrElse(false)) "an" else "a"
 
   private def findVerb(words: List[String]): Option[Verb] =
     Verbs.values.find(verb => words.contains(verb.toString()))
