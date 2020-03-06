@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/storytime-slackbot/static/css/main.5f361e03.chunk.css",
+    "main.js": "/storytime-slackbot/static/js/main.d2e6f166.chunk.js",
+    "main.js.map": "/storytime-slackbot/static/js/main.d2e6f166.chunk.js.map",
+    "runtime-main.js": "/storytime-slackbot/static/js/runtime-main.9e682a49.js",
+    "runtime-main.js.map": "/storytime-slackbot/static/js/runtime-main.9e682a49.js.map",
+    "static/js/2.6fe90d73.chunk.js": "/storytime-slackbot/static/js/2.6fe90d73.chunk.js",
+    "static/js/2.6fe90d73.chunk.js.map": "/storytime-slackbot/static/js/2.6fe90d73.chunk.js.map",
+    "index.html": "/storytime-slackbot/index.html",
+    "precache-manifest.54e591c7e01d4981bfe2c6a396258fbd.js": "/storytime-slackbot/precache-manifest.54e591c7e01d4981bfe2c6a396258fbd.js",
+    "service-worker.js": "/storytime-slackbot/service-worker.js",
+    "static/css/main.5f361e03.chunk.css.map": "/storytime-slackbot/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.6fe90d73.chunk.js.LICENSE.txt": "/storytime-slackbot/static/js/2.6fe90d73.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9e682a49.js",
+    "static/js/2.6fe90d73.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.d2e6f166.chunk.js"
+  ]
+}
