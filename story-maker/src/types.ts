@@ -20,3 +20,10 @@ export interface Story {
   nodes: Node[];
   options: StoryOption[];
 }
+
+export interface NodeTracker {
+  id: string;
+  type: "Node" | "StoryOption";
+  x: number;
+  y: number;
+}

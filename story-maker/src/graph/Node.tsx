@@ -7,6 +7,13 @@ interface NodeProps {
   node: Node;
   updateNode(node: Node): void;
   addOption(nodeId: string): void;
+  addOrUpdateNodeTracker(
+    id: string,
+    type: "Node" | "StoryOption",
+    x: number,
+    y: number
+  ): void;
+
   x: number;
   y: number;
 }
@@ -16,9 +23,17 @@ const NodeComponent: FunctionComponent<NodeProps> = ({
   updateNode,
   addOption,
   x,
-  y
+  y,
+  addOrUpdateNodeTracker
 }) => (
-  <DraggableDiv className="node" x={x} y={y}>
+  <DraggableDiv
+    className="node"
+    x={x}
+    y={y}
+    onUpdatePosition={(updatedX, updatedY) =>
+      addOrUpdateNodeTracker(node.id, "Node", updatedX, updatedY)
+    }
+  >
     <input
       value={node.statement}
       onChange={e => updateNode({ ...node, statement: e.target.value })}

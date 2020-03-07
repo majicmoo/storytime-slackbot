@@ -5,6 +5,7 @@ interface DraggableDivProps {
   y: number;
   children: ReactNode;
   className: string;
+  onUpdatePosition(x: number, y: number): void;
 }
 
 interface DraggableDivState {
@@ -25,6 +26,10 @@ class DraggableDiv extends React.Component<
     this.state = { x: props.x, y: props.y, dragging: false, relX: 0, relY: 0 };
   }
 
+  public componentDidMount() {
+    this.props.onUpdatePosition(this.props.x, this.props.y);
+  }
+
   public componentDidUpdate(
     props: DraggableDivProps,
     state: DraggableDivState
@@ -39,6 +44,7 @@ class DraggableDiv extends React.Component<
   }
 
   private startDragging = (e: React.MouseEvent<HTMLDivElement>) => {
+    console.log("click");
     if (this.ref.current) {
       this.setState({
         dragging: true,
@@ -53,11 +59,11 @@ class DraggableDiv extends React.Component<
   };
 
   private drag = (e: MouseEvent) => {
+    const x = e.pageX - this.state.relX;
+    const y = e.pageY - this.state.relY;
     if (this.state.dragging) {
-      this.setState({
-        x: e.pageX - this.state.relX,
-        y: e.pageY - this.state.relY
-      });
+      this.setState({ x, y });
+      this.props.onUpdatePosition(x, y);
     }
   };
 
