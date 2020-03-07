@@ -1,24 +1,31 @@
 import React, { FunctionComponent } from "react";
 import { Node } from "../types";
 
-import "./node.css";
+import DraggableDiv from "./DraggableDiv";
 
 interface NodeProps {
   node: Node;
-  updateStatement(nodeId: string, statement: string): void;
+  updateNode(node: Node): void;
+  addOption(nodeId: string): void;
+  x: number;
+  y: number;
 }
 
 const NodeComponent: FunctionComponent<NodeProps> = ({
-  node: { statement, type, id },
-  updateStatement
+  node,
+  updateNode,
+  addOption,
+  x,
+  y
 }) => (
-  <div className="node">
+  <DraggableDiv className="node" x={x} y={y}>
     <input
-      value={statement}
-      onChange={e => updateStatement(id, e.target.value)}
+      value={node.statement}
+      onChange={e => updateNode({ ...node, statement: e.target.value })}
     />
-    <p>{type}</p>
-  </div>
+    <p>{node.type}</p>
+    <button onClick={() => addOption(node.id)}>Add Option</button>
+  </DraggableDiv>
 );
 
 export default NodeComponent;

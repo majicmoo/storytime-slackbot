@@ -1,0 +1,10 @@
+.node {
+  background-color: pink;
+  max-width: 200px;
+  position: absolute;
+}
+
+.option {
+  background-color: aquamarine;
+  max-width: 200px;
+}

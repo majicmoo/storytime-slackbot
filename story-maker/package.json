@@ -8,13 +8,17 @@
     "@testing-library/user-event": "^7.2.1",
     "@types/jest": "^24.9.1",
     "@types/node": "^12.12.29",
+    "@types/ramda": "^0.26.43",
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
+    "@types/uuid": "^7.0.0",
     "gh-pages": "^2.2.0",
+    "ramda": "^0.27.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "uuid": "^7.0.2"
   },
   "homepage": "https://majicmoo.github.io/storytime-slackbot",
   "scripts": {
