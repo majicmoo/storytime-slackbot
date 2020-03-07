@@ -67,7 +67,7 @@ class App extends React.Component<{}, AppState> {
           <button onClick={() => this.updateTab("graph")}>Graph</button>
           <button onClick={() => this.updateTab("json")}>JSON</button>
         </div>
-        {tab === "graph" && (
+        <div className={tab === "graph" ? "" : "tab--hidden"}>
           <GraphTab
             story={story}
             nodeTracker={nodeTracker}
@@ -77,8 +77,10 @@ class App extends React.Component<{}, AppState> {
             updateOption={this.updateOption}
             addOrUpdateNodeTracker={this.addOrUpdateNodeTracker}
           />
-        )}
-        {tab === "json" && <JsonTab story={story} />}
+        </div>
+        <div className={tab === "json" ? "" : "tab--hidden"}>
+          <JsonTab story={story} />
+        </div>
       </div>
     );
   }
