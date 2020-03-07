@@ -20,6 +20,14 @@
 
 .option {
   background-color: aquamarine;
-  max-width: 200px;
+  max-width: 400px;
   position: absolute;
+}
+
+.verbs {
+  display: flex;
+}
+
+.verb {
+  padding: 10px;
 }

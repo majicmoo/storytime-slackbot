@@ -1,15 +1,32 @@
-import { Story, Node, StoryOption } from "./types";
+import { Story, Node, StoryOption, Verb } from "./types";
 import { v4 as uuidv4 } from "uuid";
 import { update } from "ramda";
 
-export const addNode = (story: Story): Story => {
+export const addNode = (
+  story: Story,
+  option: StoryOption,
+  verb: Verb
+): Story => {
   const nodes = story.nodes;
+  const id = uuidv4();
   const updatedNodes: Node[] = [
     ...nodes,
-    { type: "Normal", statement: "", id: uuidv4(), optionIds: [] }
+    { type: "Normal", statement: "", id, optionIds: [] }
   ];
 
-  return { ...story, nodes: updatedNodes };
+  const optionIndex = story.options.findIndex(o => o.id === option.id);
+  const updatedOption: StoryOption = {
+    ...option,
+    ...(verb === "taste" && { tasteId: id }),
+    ...(verb === "touch" && { touchId: id }),
+    ...(verb === "listen" && { listenId: id }),
+    ...(verb === "look" && { lookId: id }),
+    ...(verb === "smell" && { smellId: id })
+  };
+
+  const options = update(optionIndex, updatedOption, story.options);
+
+  return { ...story, nodes: updatedNodes, options };
 };
 
 export const addOption = (story: Story, nodeId: string): Story => {

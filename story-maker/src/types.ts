@@ -27,3 +27,5 @@ export interface NodeTracker {
   x: number;
   y: number;
 }
+
+export type Verb = "taste" | "touch" | "smell" | "look" | "listen";

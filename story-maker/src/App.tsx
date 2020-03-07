@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Story, Node, StoryOption, NodeTracker } from "./types";
+import { Story, Node, StoryOption, NodeTracker, Verb } from "./types";
 import GraphTab from "./graph/GraphTab";
 import JsonTab from "./JsonTab";
 import { adjust, update } from "ramda";
@@ -48,12 +48,14 @@ class App extends React.Component<{}, AppState> {
     }
   };
 
-  // private addNode = () => {
-  //   this.setState({ story: addNode(this.state.story) });
-  // };
+  private addNode = (option: StoryOption, verb: Verb) => {
+    this.setState({ story: addNode(this.state.story, option, verb) });
+  };
+
   private addOption = (nodeId: string) => {
     this.setState({ story: addOption(this.state.story, nodeId) });
   };
+
   private updateOption = (option: StoryOption) => {
     this.setState({ story: updateOption(this.state.story, option) });
   };
@@ -74,6 +76,7 @@ class App extends React.Component<{}, AppState> {
             updateTitle={this.updateTitle}
             updateNode={this.updateNode}
             addOption={this.addOption}
+            addNode={this.addNode}
             updateOption={this.updateOption}
             addOrUpdateNodeTracker={this.addOrUpdateNodeTracker}
           />
