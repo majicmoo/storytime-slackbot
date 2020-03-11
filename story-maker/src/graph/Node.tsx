@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from "react";
 import classnames from "classnames";
-import { Node } from "../types";
+import { Node, NodeType } from "../types";
 
 import DraggableDiv from "./DraggableDiv";
 import NodeAdder from "./NodeAdder";
+import NodeTypeButton from "./NodeTypeButton";
 
 interface NodeProps {
   node: Node;
@@ -33,55 +34,65 @@ const NodeComponent: FunctionComponent<NodeProps> = ({
   y,
   addOrUpdateNodeTracker,
   startNode
-}) => (
-  <DraggableDiv
-    x={x}
-    y={y}
-    onUpdatePosition={(updatedX, updatedY, width, height) =>
-      addOrUpdateNodeTracker(node.id, "Node", updatedX, updatedY, width, height)
-    }
-  >
-    <div className="node">
-      <textarea
-        placeholder="Add a statement e.g. You walk into a dark room."
-        value={node.statement}
-        onChange={e => updateNode({ ...node, statement: e.target.value })}
-      />
-      <div className="node-type--wrapper">
-        <p
-          className={classnames("node-type", {
-            "node-type--selected": node.type === "Win"
-          })}
-        >
-          Win
-        </p>
-        <p
-          className={classnames("node-type", {
-            "node-type--selected": node.type === "Normal"
-          })}
-        >
-          Normal
-        </p>
-        <p
-          className={classnames("node-type", {
-            "node-type--selected": node.type === "Death"
-          })}
-        >
-          Death
-        </p>
+}) => {
+  const updateType = (type: NodeType) => updateNode({ ...node, type });
+  return (
+    <DraggableDiv
+      x={x}
+      y={y}
+      onUpdatePosition={(updatedX, updatedY, width, height) =>
+        addOrUpdateNodeTracker(
+          node.id,
+          "Node",
+          updatedX,
+          updatedY,
+          width,
+          height
+        )
+      }
+    >
+      <div className="node">
+        <textarea
+          placeholder="Add a statement e.g. You walk into a dark room."
+          value={node.statement}
+          onChange={e => updateNode({ ...node, statement: e.target.value })}
+        />
+        <div className="node-type--wrapper">
+          {!startNode && (
+            <NodeTypeButton
+              type="Win"
+              currentType={node.type}
+              updateType={updateType}
+            />
+          )}
+          <NodeTypeButton
+            type="Normal"
+            currentType={node.type}
+            updateType={updateType}
+          />
+          {!startNode && (
+            <NodeTypeButton
+              type="Death"
+              currentType={node.type}
+              updateType={updateType}
+            />
+          )}
+        </div>
+        {node.type === "Normal" && (
+          <NodeAdder onClick={() => addOption(node.id)} />
+        )}
+        {!startNode && (
+          <button
+            className="button"
+            title="remove node"
+            onClick={() => removeNode(node)}
+          >
+            <i className="fas fa-minus-circle"></i>
+          </button>
+        )}
       </div>
-      <NodeAdder onClick={() => addOption(node.id)} />
-      {!startNode && node.type === "Normal" && (
-        <button
-          className="button"
-          title="remove node"
-          onClick={() => removeNode(node)}
-        >
-          <i className="fas fa-minus-circle"></i>
-        </button>
-      )}
-    </div>
-  </DraggableDiv>
-);
+    </DraggableDiv>
+  );
+};
 
 export default NodeComponent;

@@ -1,8 +1,10 @@
+export type NodeType = "Normal" | "Win" | "Death";
+
 export interface Node {
   id: string;
   statement: string;
   optionIds: string[];
-  type: "Normal" | "Win" | "Death";
+  type: NodeType;
 }
 
 export interface StoryOption {

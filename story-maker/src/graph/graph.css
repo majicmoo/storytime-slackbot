@@ -85,17 +85,23 @@
   text-align: center;
 }
 
+.node-type {
+  padding: 5px;
+  padding: 5px;
+  border: none;
+  background-color: unset;
+  color: white;
+}
+
 .node-type--selected {
   border-radius: 10px;
   background-color: white;
   color: #ff91bc;
 }
-.node-type {
-  padding: 5px;
-}
 
 .node-type--wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   color: white;
+  padding: 10px 5px;
 }
