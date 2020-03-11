@@ -55,3 +55,17 @@
 .switcher:hover {
   background-color: #ff6fa7;
 }
+
+.json {
+  background: #3c3138;
+  min-height: 50vh;
+  margin: 20px;
+  padding: 20px;
+  color: white;
+  border-radius: 10px;
+}
+
+* {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}

@@ -6,8 +6,8 @@ interface JsonTabProps {
 }
 
 const JsonTab: FunctionComponent<JsonTabProps> = story => (
-  <div>
-    <p>{JSON.stringify(story)}</p>
+  <div className="json">
+    <code>{JSON.stringify(story)}</code>
   </div>
 );
 
