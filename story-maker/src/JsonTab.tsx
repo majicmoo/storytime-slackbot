@@ -40,7 +40,7 @@ class JsonTab extends React.Component<JsonTabProps, JsonTabState> {
   public render() {
     const { error, updatedJson } = this.state;
     return (
-      <div>
+      <div className="json-tab">
         <p
           className={classnames("valid-checker", {
             "valid-checker--valid": !error
@@ -50,13 +50,11 @@ class JsonTab extends React.Component<JsonTabProps, JsonTabState> {
           {!error && <i className="fas fa-check-circle" />}
         </p>
         <div className="json-wrapper">
-          <code>
-            <textarea
-              className="json"
-              value={updatedJson}
-              onChange={e => this.validateJson(e.target.value)}
-            />
-          </code>
+          <textarea
+            className="json--text-area"
+            value={updatedJson}
+            onChange={e => this.validateJson(e.target.value)}
+          />
         </div>
       </div>
     );

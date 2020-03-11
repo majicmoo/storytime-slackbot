@@ -56,19 +56,22 @@
   background-color: #ff6fa7;
 }
 
-.json {
+.json-tab {
+  padding: 0 40px;
+}
+
+.json--text-area {
   background: #3c3138;
   min-height: 50vh;
-  margin: 20px;
-  padding: 20px;
   color: white;
   border-radius: 10px;
-  width: 80vw;
+  width: 90%;
+  max-width: 90%;
+  padding: 10px;
 }
 
 .valid-checker {
   text-align: right;
-  padding-right: 5rem;
   color: #ff7373;
 }
 
