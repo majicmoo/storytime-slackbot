@@ -4,14 +4,14 @@ import NodeComponent from "./Node";
 import Option from "./Option";
 
 import "./graph.css";
-import Line from "./Line";
-import Lines from "../Lines";
+import Lines from "./Lines";
 
 interface GraphTabProps {
   story: Story;
   nodeTracker: NodeTracker[];
   updateTitle(title: string): void;
   updateNode(node: Node): void;
+  removeNode(node: Node): void;
   addOption(nodeId: string): void;
   addNode(option: StoryOption, verb: Verb): void;
   updateOption(option: StoryOption): void;
@@ -19,7 +19,9 @@ interface GraphTabProps {
     id: string,
     type: "Node" | "StoryOption",
     x: number,
-    y: number
+    y: number,
+    width: number,
+    height: number
   ): void;
 }
 
@@ -31,7 +33,8 @@ const GraphTab: FunctionComponent<GraphTabProps> = ({
   updateOption,
   addOrUpdateNodeTracker,
   addOption,
-  addNode
+  addNode,
+  removeNode
 }) => (
   <div>
     <input
@@ -44,9 +47,11 @@ const GraphTab: FunctionComponent<GraphTabProps> = ({
         node={node}
         addOption={addOption}
         updateNode={updateNode}
+        removeNode={removeNode}
         addOrUpdateNodeTracker={addOrUpdateNodeTracker}
         x={index}
         y={index}
+        startNode={index === 0}
       />
     ))}
 

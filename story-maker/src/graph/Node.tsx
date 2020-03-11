@@ -5,13 +5,17 @@ import DraggableDiv from "./DraggableDiv";
 
 interface NodeProps {
   node: Node;
+  startNode: boolean;
   updateNode(node: Node): void;
+  removeNode(node: Node): void;
   addOption(nodeId: string): void;
   addOrUpdateNodeTracker(
     id: string,
     type: "Node" | "StoryOption",
     x: number,
-    y: number
+    y: number,
+    width: number,
+    height: number
   ): void;
 
   x: number;
@@ -22,16 +26,18 @@ const NodeComponent: FunctionComponent<NodeProps> = ({
   node,
   updateNode,
   addOption,
+  removeNode,
   x,
   y,
-  addOrUpdateNodeTracker
+  addOrUpdateNodeTracker,
+  startNode
 }) => (
   <DraggableDiv
     className="node"
     x={x}
     y={y}
-    onUpdatePosition={(updatedX, updatedY) =>
-      addOrUpdateNodeTracker(node.id, "Node", updatedX, updatedY)
+    onUpdatePosition={(updatedX, updatedY, width, height) =>
+      addOrUpdateNodeTracker(node.id, "Node", updatedX, updatedY, width, height)
     }
   >
     <input
@@ -40,6 +46,7 @@ const NodeComponent: FunctionComponent<NodeProps> = ({
     />
     <p>{node.type}</p>
     <button onClick={() => addOption(node.id)}>Add Option</button>
+    {!startNode && <button onClick={() => removeNode(node)}>Remove</button>}
   </DraggableDiv>
 );
 

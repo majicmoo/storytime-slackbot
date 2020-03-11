@@ -1,6 +1,6 @@
 import React from "react";
-import Line from "./graph/Line";
-import { NodeTracker, Story, Node } from "./types";
+import Line from "./Line";
+import { NodeTracker, Story, Node } from "../types";
 
 interface LinesProps {
   nodeTracker: NodeTracker[];
@@ -44,20 +44,32 @@ const calcLinesFromStoryOptions = (
       const option = story.options.find(o => o.id === trackedNode.id);
       if (option) {
         const stuff = [];
-        if (option.listenId) {
-          stuff.push(aaa(option.listenId, nodeTracker, trackedNode));
+        if (option.tasteId) {
+          stuff.push(
+            makeOptionalOptionLine(option.tasteId, nodeTracker, trackedNode, 0)
+          );
+        }
+
+        if (option.touchId) {
+          stuff.push(
+            makeOptionalOptionLine(option.touchId, nodeTracker, trackedNode, 1)
+          );
+        }
+
+        if (option.smellId) {
+          stuff.push(
+            makeOptionalOptionLine(option.smellId, nodeTracker, trackedNode, 2)
+          );
         }
         if (option.lookId) {
-          stuff.push(aaa(option.lookId, nodeTracker, trackedNode));
+          stuff.push(
+            makeOptionalOptionLine(option.lookId, nodeTracker, trackedNode, 3)
+          );
         }
-        if (option.smellId) {
-          stuff.push(aaa(option.smellId, nodeTracker, trackedNode));
-        }
-        if (option.tasteId) {
-          stuff.push(aaa(option.tasteId, nodeTracker, trackedNode));
-        }
-        if (option.touchId) {
-          stuff.push(aaa(option.touchId, nodeTracker, trackedNode));
+        if (option.listenId) {
+          stuff.push(
+            makeOptionalOptionLine(option.listenId, nodeTracker, trackedNode, 4)
+          );
         }
 
         return stuff;
@@ -65,13 +77,14 @@ const calcLinesFromStoryOptions = (
     })
     .filter(n => n !== undefined) as any;
 
-const aaa = (
+const makeOptionalOptionLine = (
   id: string,
   nodeTracker: NodeTracker[],
-  parentNodeTracker: NodeTracker
+  parentNodeTracker: NodeTracker,
+  index: number
 ): LineType | undefined => {
   const found = nodeTracker.find(n => n.id === id);
-  return found ? makeLine(parentNodeTracker, found) : undefined;
+  return found ? makeOptionLine(parentNodeTracker, found, index) : undefined;
 };
 
 const calcLinesFromNodes = (
@@ -99,8 +112,19 @@ const what = (
 };
 
 const makeLine = (trackedNode: NodeTracker, trackedOption: NodeTracker) => ({
-  x1: trackedNode.x,
-  y1: trackedNode.y,
+  x1: trackedNode.x + trackedNode.width / 2,
+  y1: trackedNode.y + trackedNode.height,
+  x2: trackedOption.x + trackedOption.width / 2,
+  y2: trackedOption.y
+});
+
+const makeOptionLine = (
+  trackedNode: NodeTracker,
+  trackedOption: NodeTracker,
+  index: number
+) => ({
+  x1: trackedNode.x + (index / 5) * trackedNode.width + 0.1 * trackedNode.width,
+  y1: trackedNode.y + trackedNode.height,
   x2: trackedOption.x,
   y2: trackedOption.y
 });

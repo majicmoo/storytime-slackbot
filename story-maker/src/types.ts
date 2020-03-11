@@ -26,6 +26,8 @@ export interface NodeTracker {
   type: "Node" | "StoryOption";
   x: number;
   y: number;
+  width: number;
+  height: number;
 }
 
 export type Verb = "taste" | "touch" | "smell" | "look" | "listen";

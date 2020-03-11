@@ -1,6 +1,6 @@
 import { Story, Node, StoryOption, Verb } from "./types";
 import { v4 as uuidv4 } from "uuid";
-import { update } from "ramda";
+import { update, without } from "ramda";
 
 export const addNode = (
   story: Story,
@@ -28,6 +28,24 @@ export const addNode = (
 
   return { ...story, nodes: updatedNodes, options };
 };
+
+export const removeNode = (story: Story, node: Node): Story => {
+  const updatedNodes = without([node], story.nodes);
+  const options = story.options.map(o => {
+    return {
+      ...o,
+      tasteId: clearOptionOfRemovedNode(node, o.tasteId),
+      touchId: clearOptionOfRemovedNode(node, o.touchId),
+      smellId: clearOptionOfRemovedNode(node, o.smellId),
+      listenId: clearOptionOfRemovedNode(node, o.listenId),
+      lookId: clearOptionOfRemovedNode(node, o.lookId)
+    };
+  });
+  return { ...story, nodes: updatedNodes, options };
+};
+
+const clearOptionOfRemovedNode = (node: Node, optionId: string | undefined) =>
+  optionId === node.id ? undefined : optionId;
 
 export const addOption = (story: Story, nodeId: string): Story => {
   const optionId = uuidv4();

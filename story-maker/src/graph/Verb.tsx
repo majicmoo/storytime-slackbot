@@ -4,12 +4,17 @@ import { Verb } from "../types";
 interface VerbProps {
   verb: Verb;
   addVerb(verb: Verb): void;
+  disabled: boolean;
 }
 
-const VerbComponent: FunctionComponent<VerbProps> = ({ verb, addVerb }) => (
+const VerbComponent: FunctionComponent<VerbProps> = ({
+  verb,
+  addVerb,
+  disabled
+}) => (
   <div className="verb">
     <p>{verb}</p>
-    <button onClick={() => addVerb(verb)}>+</button>
+    {!disabled && <button onClick={() => addVerb(verb)}>+</button>}
   </div>
 );
 

@@ -3,8 +3,15 @@ import "./App.css";
 import { Story, Node, StoryOption, NodeTracker, Verb } from "./types";
 import GraphTab from "./graph/GraphTab";
 import JsonTab from "./JsonTab";
-import { adjust, update } from "ramda";
-import { addNode, updateNode, addOption, updateOption } from "./StoryUpdater";
+import { update } from "ramda";
+import {
+  addNode,
+  updateNode,
+  addOption,
+  updateOption,
+  removeNode
+} from "./StoryUpdater";
+import { removeNodeFromTracker } from "./NodeTrackerHelper";
 
 interface AppState {
   tab: "graph" | "json";
@@ -36,11 +43,13 @@ class App extends React.Component<{}, AppState> {
     id: string,
     type: "Node" | "StoryOption",
     x: number,
-    y: number
+    y: number,
+    width: number,
+    height: number
   ) => {
     const { nodeTracker } = this.state;
     const index = nodeTracker.findIndex(n => n.id === id);
-    const node = { id, x, y, type };
+    const node = { id, x, y, type, width, height };
     if (index === -1) {
       this.setState({ nodeTracker: [...nodeTracker, node] });
     } else {
@@ -50,6 +59,13 @@ class App extends React.Component<{}, AppState> {
 
   private addNode = (option: StoryOption, verb: Verb) => {
     this.setState({ story: addNode(this.state.story, option, verb) });
+  };
+
+  private removeNode = (node: Node) => {
+    this.setState({
+      story: removeNode(this.state.story, node),
+      nodeTracker: removeNodeFromTracker(this.state.nodeTracker, node.id)
+    });
   };
 
   private addOption = (nodeId: string) => {
@@ -75,6 +91,7 @@ class App extends React.Component<{}, AppState> {
             nodeTracker={nodeTracker}
             updateTitle={this.updateTitle}
             updateNode={this.updateNode}
+            removeNode={this.removeNode}
             addOption={this.addOption}
             addNode={this.addNode}
             updateOption={this.updateOption}
