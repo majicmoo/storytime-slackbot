@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/storytime-slackbot/precache-manifest.44bc18a7450e4338e2ea76e6c39577fe.js"
+  "/storytime-slackbot/precache-manifest.f13cef9f6a075226f11c076e27712a17.js"
 );
 
 self.addEventListener('message', (event) => {
