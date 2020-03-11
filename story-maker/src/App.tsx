@@ -69,12 +69,14 @@ class App extends React.Component<{}, AppState> {
   };
 
   private addOption = (nodeId: string) => {
-    this.setState({ story: addOption(this.state.story, nodeId) });
+    this.updateStory(addOption(this.state.story, nodeId));
   };
 
   private updateOption = (option: StoryOption) => {
-    this.setState({ story: updateOption(this.state.story, option) });
+    this.updateStory(updateOption(this.state.story, option));
   };
+
+  private updateStory = (story: Story) => this.setState({ story });
 
   public render() {
     const { tab, story, nodeTracker } = this.state;
@@ -111,7 +113,7 @@ class App extends React.Component<{}, AppState> {
           />
         </div>
         <div className={tab === "json" ? "" : "tab--hidden"}>
-          <JsonTab story={story} />
+          <JsonTab story={story} updateStory={this.updateStory} />
         </div>
       </div>
     );

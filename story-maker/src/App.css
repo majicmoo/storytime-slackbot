@@ -63,6 +63,17 @@
   padding: 20px;
   color: white;
   border-radius: 10px;
+  width: 80vw;
+}
+
+.valid-checker {
+  text-align: right;
+  padding-right: 5rem;
+  color: #ff7373;
+}
+
+.valid-checker--valid {
+  color: #7eaa7e;
 }
 
 * {
