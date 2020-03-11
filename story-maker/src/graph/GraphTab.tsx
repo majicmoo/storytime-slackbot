@@ -12,6 +12,7 @@ interface GraphTabProps {
   updateTitle(title: string): void;
   updateNode(node: Node): void;
   removeNode(node: Node): void;
+  removeOption(option: StoryOption): void;
   addOption(nodeId: string): void;
   addNode(option: StoryOption, verb: Verb): void;
   updateOption(option: StoryOption): void;
@@ -33,6 +34,7 @@ const GraphTab: FunctionComponent<GraphTabProps> = ({
   updateOption,
   addOrUpdateNodeTracker,
   addOption,
+  removeOption,
   addNode,
   removeNode
 }) => (
@@ -62,6 +64,7 @@ const GraphTab: FunctionComponent<GraphTabProps> = ({
         option={option}
         key={option.id}
         updateOption={updateOption}
+        removeOption={removeOption}
         addOrUpdateNodeTracker={addOrUpdateNodeTracker}
         addNode={addNode}
         x={index}

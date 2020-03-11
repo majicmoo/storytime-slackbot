@@ -44,6 +44,15 @@ export const removeNode = (story: Story, node: Node): Story => {
   return { ...story, nodes: updatedNodes, options };
 };
 
+export const removeOption = (story: Story, option: StoryOption): Story => {
+  const options = without([option], story.options);
+  const nodes = story.nodes.map(n => ({
+    ...n,
+    optionIds: n.optionIds.filter(id => id !== option.id)
+  }));
+  return { ...story, nodes, options };
+};
+
 const clearOptionOfRemovedNode = (node: Node, optionId: string | undefined) =>
   optionId === node.id ? undefined : optionId;
 

@@ -6,6 +6,7 @@ import VerbComponent from "./Verb";
 interface OptionProps {
   option: StoryOption;
   updateOption(option: StoryOption): void;
+  removeOption(option: StoryOption): void;
   addOrUpdateNodeTracker(
     id: string,
     type: "Node" | "StoryOption",
@@ -23,7 +24,14 @@ class Option extends React.Component<OptionProps> {
   private addNode = (verb: Verb) => this.props.addNode(this.props.option, verb);
 
   public render() {
-    const { option, updateOption, x, y, addOrUpdateNodeTracker } = this.props;
+    const {
+      option,
+      updateOption,
+      x,
+      y,
+      addOrUpdateNodeTracker,
+      removeOption
+    } = this.props;
     return (
       <DraggableDiv
         x={x}
@@ -40,13 +48,24 @@ class Option extends React.Component<OptionProps> {
         }
       >
         <div className="option">
-          <input
-            value={option.item}
-            placeholder="item to interact with e.g. book"
-            onChange={event =>
-              updateOption({ ...option, item: event.target.value })
-            }
-          />
+          <div className="option-top">
+            <input
+              value={option.item}
+              placeholder="item to interact with e.g. book"
+              onChange={event =>
+                updateOption({ ...option, item: event.target.value })
+              }
+            />
+            <div>
+              <button
+                className="button"
+                title="remove node"
+                onClick={() => removeOption(option)}
+              >
+                <i className="fas fa-minus-circle" />
+              </button>
+            </div>
+          </div>
           <div className="verbs">
             <VerbComponent
               verb="taste"

@@ -9,7 +9,8 @@ import {
   updateNode,
   addOption,
   updateOption,
-  removeNode
+  removeNode,
+  removeOption
 } from "./StoryUpdater";
 import { removeNodeFromTracker } from "./NodeTrackerHelper";
 
@@ -68,6 +69,12 @@ class App extends React.Component<{}, AppState> {
     });
   };
 
+  private removeOption = (option: StoryOption) => {
+    this.setState({
+      story: removeOption(this.state.story, option),
+      nodeTracker: removeNodeFromTracker(this.state.nodeTracker, option.id)
+    });
+  };
   private addOption = (nodeId: string) => {
     this.updateStory(addOption(this.state.story, nodeId));
   };
@@ -106,6 +113,7 @@ class App extends React.Component<{}, AppState> {
             updateTitle={this.updateTitle}
             updateNode={this.updateNode}
             removeNode={this.removeNode}
+            removeOption={this.removeOption}
             addOption={this.addOption}
             addNode={this.addNode}
             updateOption={this.updateOption}

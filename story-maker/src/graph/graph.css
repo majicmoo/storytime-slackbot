@@ -105,3 +105,8 @@
   color: white;
   padding: 10px 5px;
 }
+
+.option-top {
+  display: flex;
+  justify-content: space-around;
+}
