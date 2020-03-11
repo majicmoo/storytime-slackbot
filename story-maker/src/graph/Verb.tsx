@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { Verb } from "../types";
+import NodeAdder from "./NodeAdder";
 
 interface VerbProps {
   verb: Verb;
@@ -14,7 +15,7 @@ const VerbComponent: FunctionComponent<VerbProps> = ({
 }) => (
   <div className="verb">
     <p>{verb}</p>
-    {!disabled && <button onClick={() => addVerb(verb)}>+</button>}
+    {!disabled && <NodeAdder onClick={() => addVerb(verb)} />}
   </div>
 );
 

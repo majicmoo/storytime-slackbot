@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from "react";
+import classnames from "classnames";
 import { Node } from "../types";
 
 import DraggableDiv from "./DraggableDiv";
+import NodeAdder from "./NodeAdder";
 
 interface NodeProps {
   node: Node;
@@ -33,20 +35,52 @@ const NodeComponent: FunctionComponent<NodeProps> = ({
   startNode
 }) => (
   <DraggableDiv
-    className="node"
     x={x}
     y={y}
     onUpdatePosition={(updatedX, updatedY, width, height) =>
       addOrUpdateNodeTracker(node.id, "Node", updatedX, updatedY, width, height)
     }
   >
-    <input
-      value={node.statement}
-      onChange={e => updateNode({ ...node, statement: e.target.value })}
-    />
-    <p>{node.type}</p>
-    <button onClick={() => addOption(node.id)}>Add Option</button>
-    {!startNode && <button onClick={() => removeNode(node)}>Remove</button>}
+    <div className="node">
+      <textarea
+        placeholder="Add a statement e.g. You walk into a dark room."
+        value={node.statement}
+        onChange={e => updateNode({ ...node, statement: e.target.value })}
+      />
+      <div className="node-type--wrapper">
+        <p
+          className={classnames("node-type", {
+            "node-type--selected": node.type === "Win"
+          })}
+        >
+          Win
+        </p>
+        <p
+          className={classnames("node-type", {
+            "node-type--selected": node.type === "Normal"
+          })}
+        >
+          Normal
+        </p>
+        <p
+          className={classnames("node-type", {
+            "node-type--selected": node.type === "Death"
+          })}
+        >
+          Death
+        </p>
+      </div>
+      <NodeAdder onClick={() => addOption(node.id)} />
+      {!startNode && node.type === "Normal" && (
+        <button
+          className="button"
+          title="remove node"
+          onClick={() => removeNode(node)}
+        >
+          <i className="fas fa-minus-circle"></i>
+        </button>
+      )}
+    </div>
   </DraggableDiv>
 );
 

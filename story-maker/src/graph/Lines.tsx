@@ -125,6 +125,6 @@ const makeOptionLine = (
 ) => ({
   x1: trackedNode.x + (index / 5) * trackedNode.width + 0.1 * trackedNode.width,
   y1: trackedNode.y + trackedNode.height,
-  x2: trackedOption.x,
+  x2: trackedOption.x + trackedOption.width / 2,
   y2: trackedOption.y
 });

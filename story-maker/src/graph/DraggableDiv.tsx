@@ -1,10 +1,10 @@
 import React, { createRef, RefObject, ReactNode } from "react";
+import classnames from "classnames";
 
 interface DraggableDivProps {
   x: number;
   y: number;
   children: ReactNode;
-  className: string;
   onUpdatePosition(x: number, y: number, width: number, height: number): void;
 }
 
@@ -75,16 +75,20 @@ class DraggableDiv extends React.Component<
   private height = (): number => this.ref.current?.clientHeight || 0;
 
   public render() {
-    const { children, className } = this.props;
-    const { x, y } = this.state;
+    const { children } = this.props;
+    const { x, y, dragging } = this.state;
 
     return (
       <div
-        className={className}
+        className={classnames("draggable-div", {
+          "draggable-div--dragging": dragging
+        })}
         style={{ left: `${x}px`, top: `${y}px` }}
-        onMouseDown={this.startDragging}
         ref={this.ref}
       >
+        <div className="drag-wrapper" onMouseDown={this.startDragging}>
+          <i className="fas fa-arrows-alt" title="move node"></i>
+        </div>
         {children}
       </div>
     );

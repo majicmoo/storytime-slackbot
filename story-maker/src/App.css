@@ -40,3 +40,18 @@
 .tab--hidden {
   display: none;
 }
+
+.switcher {
+  font-size: 1.5rem;
+  border: 0;
+  margin: 10px;
+  background-color: #ff91bc;
+  border-radius: 30px;
+  color: white;
+  width: 55px;
+  height: 55px;
+}
+
+.switcher:hover {
+  background-color: #ff6fa7;
+}

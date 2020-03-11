@@ -26,7 +26,6 @@ class Option extends React.Component<OptionProps> {
     const { option, updateOption, x, y, addOrUpdateNodeTracker } = this.props;
     return (
       <DraggableDiv
-        className="option"
         x={x}
         y={y}
         onUpdatePosition={(updatedX, updatedY, width, height) =>
@@ -40,39 +39,41 @@ class Option extends React.Component<OptionProps> {
           )
         }
       >
-        <p>Option</p>
-        <input
-          value={option.item}
-          onChange={event =>
-            updateOption({ ...option, item: event.target.value })
-          }
-        />
-        <div className="verbs">
-          <VerbComponent
-            verb="taste"
-            addVerb={this.addNode}
-            disabled={option.tasteId !== undefined}
+        <div className="option">
+          <input
+            value={option.item}
+            placeholder="item to interact with e.g. book"
+            onChange={event =>
+              updateOption({ ...option, item: event.target.value })
+            }
           />
-          <VerbComponent
-            verb="touch"
-            addVerb={this.addNode}
-            disabled={option.touchId !== undefined}
-          />
-          <VerbComponent
-            verb="smell"
-            addVerb={this.addNode}
-            disabled={option.smellId !== undefined}
-          />
-          <VerbComponent
-            verb="look"
-            addVerb={this.addNode}
-            disabled={option.lookId !== undefined}
-          />
-          <VerbComponent
-            verb="listen"
-            addVerb={this.addNode}
-            disabled={option.listenId !== undefined}
-          />
+          <div className="verbs">
+            <VerbComponent
+              verb="taste"
+              addVerb={this.addNode}
+              disabled={option.tasteId !== undefined}
+            />
+            <VerbComponent
+              verb="touch"
+              addVerb={this.addNode}
+              disabled={option.touchId !== undefined}
+            />
+            <VerbComponent
+              verb="smell"
+              addVerb={this.addNode}
+              disabled={option.smellId !== undefined}
+            />
+            <VerbComponent
+              verb="look"
+              addVerb={this.addNode}
+              disabled={option.lookId !== undefined}
+            />
+            <VerbComponent
+              verb="listen"
+              addVerb={this.addNode}
+              disabled={option.listenId !== undefined}
+            />
+          </div>
         </div>
       </DraggableDiv>
     );

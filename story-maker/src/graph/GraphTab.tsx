@@ -39,6 +39,8 @@ const GraphTab: FunctionComponent<GraphTabProps> = ({
   <div>
     <input
       value={story.title}
+      className="title"
+      placeholder="Title"
       onChange={event => updateTitle(event.target.value)}
     />
     {story.nodes.map((node, index) => (

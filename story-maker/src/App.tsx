@@ -82,8 +82,20 @@ class App extends React.Component<{}, AppState> {
     return (
       <div className="App">
         <div className="tab-switcher">
-          <button onClick={() => this.updateTab("graph")}>Graph</button>
-          <button onClick={() => this.updateTab("json")}>JSON</button>
+          <button
+            className="switcher"
+            title="graph"
+            onClick={() => this.updateTab("graph")}
+          >
+            <i className="fas fa-sitemap" />
+          </button>
+          <button
+            className="switcher"
+            title="json"
+            onClick={() => this.updateTab("json")}
+          >
+            <i className="far fa-file" />
+          </button>
         </div>
         <div className={tab === "graph" ? "" : "tab--hidden"}>
           <GraphTab
