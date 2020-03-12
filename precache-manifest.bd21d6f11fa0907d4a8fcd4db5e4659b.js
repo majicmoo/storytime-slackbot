@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5d2b6b4cec714091905a98c296b2aa98",
+    "revision": "020ac2855659313e5828fff2f1c85999",
     "url": "/storytime-slackbot/index.html"
   },
   {
-    "revision": "9488d1f3737a7aba506b",
+    "revision": "e40335af78075e697ae4",
     "url": "/storytime-slackbot/static/css/main.6a23e304.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/storytime-slackbot/static/js/2.ebe6befe.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9488d1f3737a7aba506b",
-    "url": "/storytime-slackbot/static/js/main.37088a86.chunk.js"
+    "revision": "e40335af78075e697ae4",
+    "url": "/storytime-slackbot/static/js/main.77fa05a8.chunk.js"
   },
   {
     "revision": "8adf98bec2a7fe4baf48",
