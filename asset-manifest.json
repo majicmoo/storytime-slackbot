@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/storytime-slackbot/static/css/main.f5edb5ba.chunk.css",
-    "main.js": "/storytime-slackbot/static/js/main.d247e6e0.chunk.js",
-    "main.js.map": "/storytime-slackbot/static/js/main.d247e6e0.chunk.js.map",
+    "main.css": "/storytime-slackbot/static/css/main.6a23e304.chunk.css",
+    "main.js": "/storytime-slackbot/static/js/main.17094bb2.chunk.js",
+    "main.js.map": "/storytime-slackbot/static/js/main.17094bb2.chunk.js.map",
     "runtime-main.js": "/storytime-slackbot/static/js/runtime-main.9e682a49.js",
     "runtime-main.js.map": "/storytime-slackbot/static/js/runtime-main.9e682a49.js.map",
-    "static/js/2.e761c7fb.chunk.js": "/storytime-slackbot/static/js/2.e761c7fb.chunk.js",
-    "static/js/2.e761c7fb.chunk.js.map": "/storytime-slackbot/static/js/2.e761c7fb.chunk.js.map",
+    "static/js/2.ebe6befe.chunk.js": "/storytime-slackbot/static/js/2.ebe6befe.chunk.js",
+    "static/js/2.ebe6befe.chunk.js.map": "/storytime-slackbot/static/js/2.ebe6befe.chunk.js.map",
     "index.html": "/storytime-slackbot/index.html",
-    "precache-manifest.7bee546e2e8ebd220cf5490c1febbacc.js": "/storytime-slackbot/precache-manifest.7bee546e2e8ebd220cf5490c1febbacc.js",
+    "precache-manifest.bf9682ea363f23c9a8af75cbad5d639d.js": "/storytime-slackbot/precache-manifest.bf9682ea363f23c9a8af75cbad5d639d.js",
     "service-worker.js": "/storytime-slackbot/service-worker.js",
-    "static/css/main.f5edb5ba.chunk.css.map": "/storytime-slackbot/static/css/main.f5edb5ba.chunk.css.map",
-    "static/js/2.e761c7fb.chunk.js.LICENSE.txt": "/storytime-slackbot/static/js/2.e761c7fb.chunk.js.LICENSE.txt"
+    "static/css/main.6a23e304.chunk.css.map": "/storytime-slackbot/static/css/main.6a23e304.chunk.css.map",
+    "static/js/2.ebe6befe.chunk.js.LICENSE.txt": "/storytime-slackbot/static/js/2.ebe6befe.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.9e682a49.js",
-    "static/js/2.e761c7fb.chunk.js",
-    "static/css/main.f5edb5ba.chunk.css",
-    "static/js/main.d247e6e0.chunk.js"
+    "static/js/2.ebe6befe.chunk.js",
+    "static/css/main.6a23e304.chunk.css",
+    "static/js/main.17094bb2.chunk.js"
   ]
 }
