@@ -21,9 +21,10 @@ import {
   connectToOption
 } from "./StoryUpdater";
 import { removeNodeFromTracker } from "./NodeTrackerHelper";
+import Chat from "./chat/Chat";
 
 interface AppState {
-  tab: "graph" | "json";
+  tab: "graph" | "json" | "chat";
   story: Story;
   nodeTracker: NodeTracker[];
   showLine: boolean;
@@ -50,7 +51,8 @@ class App extends React.Component<{}, AppState> {
     lineCoordinates: { x1: 0, y1: 0, x2: 0, y2: 0 }
   };
 
-  private updateTab = (tab: "graph" | "json") => this.setState({ tab });
+  private updateTab = (tab: "graph" | "json" | "chat") =>
+    this.setState({ tab });
   private updateTitle = (title: string) =>
     this.setState({ story: { ...this.state.story, title } });
   private updateNode = (node: Node) => {
@@ -130,6 +132,13 @@ class App extends React.Component<{}, AppState> {
           >
             <i className="far fa-file" />
           </button>
+          <button
+            className="switcher"
+            title="chat"
+            onClick={() => this.updateTab("chat")}
+          >
+            <i className="fas fa-robot" />
+          </button>
         </div>
         <div className={tab === "graph" ? "" : "tab--hidden"}>
           <GraphTab
@@ -152,6 +161,9 @@ class App extends React.Component<{}, AppState> {
         </div>
         <div className={tab === "json" ? "" : "tab--hidden"}>
           <JsonTab story={story} updateStory={this.updateStory} />
+        </div>
+        <div className={tab === "chat" ? "" : "tab--hidden"}>
+          <Chat />
         </div>
       </div>
     );
