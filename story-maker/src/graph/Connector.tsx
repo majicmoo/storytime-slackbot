@@ -57,7 +57,7 @@ class Connector extends React.Component<ConnectorProps> {
       drawFrom === "top" ? nodeTracker.y : nodeTracker.y + nodeTracker.height;
 
     this.props.drawLine({
-      x1: this.props.nodeTracker.x,
+      x1: this.props.nodeTracker.x + this.props.nodeTracker.width / 2,
       y1: y1,
       x2: e.pageX,
       y2: e.pageY
