@@ -10,44 +10,53 @@ interface ConnectorProps {
   onCollision(id: string): void;
   drawLine(lineCoordinates: LineCoordinates): void;
   stopDrawingLine(): void;
-  drawing: boolean;
 }
 
-class Connector extends React.Component<ConnectorProps> {
-  public componentDidUpdate(props: ConnectorProps) {
-    if (this.props.drawing && !props.drawing) {
+interface ConnectorState {
+  active: boolean;
+}
+
+class Connector extends React.Component<ConnectorProps, ConnectorState> {
+  public state = { active: false };
+  public componentDidUpdate(props: ConnectorProps, state: ConnectorState) {
+    if (this.state.active && !state.active) {
       document.addEventListener("mousemove", this.mouseMove);
       document.addEventListener("mouseup", this.stopDrawing);
-    } else if (!this.props.drawing && props.drawing) {
+    } else if (!this.state.active && state.active) {
       document.removeEventListener("mousemove", this.mouseMove);
       document.removeEventListener("mouseup", this.stopDrawing);
     }
   }
 
   private startDrawing = (e: React.MouseEvent<HTMLDivElement>) => {
+    console.log(this.props.nodeTracker.id);
+    this.setState({ active: true });
     this.drawLine(e as any);
   };
 
-  private stopDrawing = () => {
+  private stopDrawing = (e: MouseEvent) => {
+    this.setState({ active: false });
+
+    const overlappingNode = this.props.nodeTrackers.find(
+      n =>
+        n.id !== this.props.nodeTracker.id &&
+        n.type === this.props.canCollideWith &&
+        n.x < e.pageX &&
+        e.pageX < n.x + n.width &&
+        n.y < e.pageY &&
+        e.pageY < n.y + n.height
+    );
+    console.log(overlappingNode);
+
+    if (overlappingNode) {
+      this.props.onCollision(overlappingNode.id);
+    }
     this.props.stopDrawingLine();
   };
 
   private mouseMove = (e: MouseEvent) => {
-    if (this.props.drawing) {
+    if (this.state.active) {
       this.drawLine(e);
-      const overlappingNode = this.props.nodeTrackers.find(
-        n =>
-          n.id !== this.props.nodeTracker.id &&
-          n.type === this.props.canCollideWith &&
-          n.x < e.pageX &&
-          e.pageX < n.x + n.width &&
-          n.y < e.pageY &&
-          e.pageY < n.y + n.height
-      );
-
-      if (overlappingNode) {
-        this.props.onCollision(overlappingNode.id);
-      }
     }
   };
 

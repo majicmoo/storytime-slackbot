@@ -28,7 +28,6 @@ interface NodeProps {
   y: number;
   drawLine(lineCoordinates: LineCoordinates): void;
   stopDrawingLine(): void;
-  drawing: boolean;
 }
 
 const NodeComponent: FunctionComponent<NodeProps> = ({
@@ -44,8 +43,7 @@ const NodeComponent: FunctionComponent<NodeProps> = ({
   startNode,
   connectToOption,
   drawLine,
-  stopDrawingLine,
-  drawing
+  stopDrawingLine
 }) => (
   <DraggableDiv
     x={x}
@@ -58,7 +56,6 @@ const NodeComponent: FunctionComponent<NodeProps> = ({
       drawFrom="bottom"
       drawLine={drawLine}
       stopDrawingLine={stopDrawingLine}
-      drawing={drawing}
       nodeTrackers={nodeTrackers}
       nodeTracker={
         nodeTracker || {

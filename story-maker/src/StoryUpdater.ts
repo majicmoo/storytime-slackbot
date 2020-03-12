@@ -84,5 +84,6 @@ export const connectToOption = (story: Story, node: Node, optionId: string) => {
     ...node,
     optionIds: uniq([...node.optionIds, optionId])
   };
+
   return { ...updateNode(story, updatedNode) };
 };

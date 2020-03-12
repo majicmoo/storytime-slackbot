@@ -79,7 +79,6 @@ const GraphTab: FunctionComponent<GraphTabProps> = ({
         x={index}
         y={index}
         startNode={index === 0}
-        drawing={showLine}
       />
     ))}
 
