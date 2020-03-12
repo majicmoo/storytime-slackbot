@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/storytime-slackbot/static/css/main.6a23e304.chunk.css",
-    "main.js": "/storytime-slackbot/static/js/main.17094bb2.chunk.js",
-    "main.js.map": "/storytime-slackbot/static/js/main.17094bb2.chunk.js.map",
+    "main.js": "/storytime-slackbot/static/js/main.37088a86.chunk.js",
+    "main.js.map": "/storytime-slackbot/static/js/main.37088a86.chunk.js.map",
     "runtime-main.js": "/storytime-slackbot/static/js/runtime-main.9e682a49.js",
     "runtime-main.js.map": "/storytime-slackbot/static/js/runtime-main.9e682a49.js.map",
     "static/js/2.ebe6befe.chunk.js": "/storytime-slackbot/static/js/2.ebe6befe.chunk.js",
     "static/js/2.ebe6befe.chunk.js.map": "/storytime-slackbot/static/js/2.ebe6befe.chunk.js.map",
     "index.html": "/storytime-slackbot/index.html",
-    "precache-manifest.bf9682ea363f23c9a8af75cbad5d639d.js": "/storytime-slackbot/precache-manifest.bf9682ea363f23c9a8af75cbad5d639d.js",
+    "precache-manifest.3267b507cc864a739a2a64b2a8e776e8.js": "/storytime-slackbot/precache-manifest.3267b507cc864a739a2a64b2a8e776e8.js",
     "service-worker.js": "/storytime-slackbot/service-worker.js",
     "static/css/main.6a23e304.chunk.css.map": "/storytime-slackbot/static/css/main.6a23e304.chunk.css.map",
     "static/js/2.ebe6befe.chunk.js.LICENSE.txt": "/storytime-slackbot/static/js/2.ebe6befe.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.9e682a49.js",
     "static/js/2.ebe6befe.chunk.js",
     "static/css/main.6a23e304.chunk.css",
-    "static/js/main.17094bb2.chunk.js"
+    "static/js/main.37088a86.chunk.js"
   ]
 }
