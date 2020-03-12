@@ -163,7 +163,7 @@ class App extends React.Component<{}, AppState> {
           <JsonTab story={story} updateStory={this.updateStory} />
         </div>
         <div className={tab === "chat" ? "" : "tab--hidden"}>
-          <Chat />
+          <Chat story={story} />
         </div>
       </div>
     );
