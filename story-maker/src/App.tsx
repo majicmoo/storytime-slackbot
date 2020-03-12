@@ -1,6 +1,13 @@
 import React from "react";
 import "./App.css";
-import { Story, Node, StoryOption, NodeTracker, Verb } from "./types";
+import {
+  Story,
+  Node,
+  StoryOption,
+  NodeTracker,
+  Verb,
+  LineCoordinates
+} from "./types";
 import GraphTab from "./graph/GraphTab";
 import JsonTab from "./JsonTab";
 import { update } from "ramda";
@@ -10,7 +17,8 @@ import {
   addOption,
   updateOption,
   removeNode,
-  removeOption
+  removeOption,
+  connectToOption
 } from "./StoryUpdater";
 import { removeNodeFromTracker } from "./NodeTrackerHelper";
 
@@ -18,6 +26,13 @@ interface AppState {
   tab: "graph" | "json";
   story: Story;
   nodeTracker: NodeTracker[];
+  showLine: boolean;
+  lineCoordinates: {
+    x1: number;
+    y1: number;
+    x2: number;
+    y2: number;
+  };
 }
 
 class App extends React.Component<{}, AppState> {
@@ -30,7 +45,9 @@ class App extends React.Component<{}, AppState> {
       ],
       options: []
     },
-    nodeTracker: []
+    nodeTracker: [],
+    showLine: false,
+    lineCoordinates: { x1: 0, y1: 0, x2: 0, y2: 0 }
   };
 
   private updateTab = (tab: "graph" | "json") => this.setState({ tab });
@@ -85,8 +102,16 @@ class App extends React.Component<{}, AppState> {
 
   private updateStory = (story: Story) => this.setState({ story });
 
+  private connectToOption = (node: Node, optionId: string) => {
+    this.updateStory(connectToOption(this.state.story, node, optionId));
+  };
+
+  private drawLine = (lineCoordinates: LineCoordinates) =>
+    this.setState({ showLine: true, lineCoordinates });
+  private stopDrawingLine = () => this.setState({ showLine: false });
+
   public render() {
-    const { tab, story, nodeTracker } = this.state;
+    const { tab, story, nodeTracker, showLine, lineCoordinates } = this.state;
 
     return (
       <div className="App">
@@ -109,7 +134,7 @@ class App extends React.Component<{}, AppState> {
         <div className={tab === "graph" ? "" : "tab--hidden"}>
           <GraphTab
             story={story}
-            nodeTracker={nodeTracker}
+            nodeTrackers={nodeTracker}
             updateTitle={this.updateTitle}
             updateNode={this.updateNode}
             removeNode={this.removeNode}
@@ -117,7 +142,12 @@ class App extends React.Component<{}, AppState> {
             addOption={this.addOption}
             addNode={this.addNode}
             updateOption={this.updateOption}
+            connectToOption={this.connectToOption}
             addOrUpdateNodeTracker={this.addOrUpdateNodeTracker}
+            showLine={showLine}
+            lineCoordinates={lineCoordinates}
+            drawLine={this.drawLine}
+            stopDrawingLine={this.stopDrawingLine}
           />
         </div>
         <div className={tab === "json" ? "" : "tab--hidden"}>

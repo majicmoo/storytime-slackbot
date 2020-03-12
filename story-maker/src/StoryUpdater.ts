@@ -1,6 +1,6 @@
 import { Story, Node, StoryOption, Verb } from "./types";
 import { v4 as uuidv4 } from "uuid";
-import { update, without } from "ramda";
+import { update, without, uniq } from "ramda";
 
 export const addNode = (
   story: Story,
@@ -77,4 +77,12 @@ export const updateOption = (story: Story, option: StoryOption): Story => {
   const index = options.findIndex(o => o.id === option.id);
   const updatedOptions = update(index, option, options);
   return { ...story, options: updatedOptions };
+};
+
+export const connectToOption = (story: Story, node: Node, optionId: string) => {
+  const updatedNode = {
+    ...node,
+    optionIds: uniq([...node.optionIds, optionId])
+  };
+  return { ...updateNode(story, updatedNode) };
 };

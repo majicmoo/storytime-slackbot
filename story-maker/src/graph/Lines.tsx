@@ -10,16 +10,16 @@ interface LinesProps {
 class Lines extends React.Component<LinesProps> {
   public render() {
     const { nodeTracker, story } = this.props;
-    const lines = calcLinesFromNodes(nodeTracker, story);
-    const otherLines = calcLinesFromStoryOptions(nodeTracker, story);
+
+    const lines = [
+      ...calcLinesFromNodes(nodeTracker, story),
+      ...calcLinesFromStoryOptions(nodeTracker, story)
+    ];
 
     return (
       <>
         {lines.map((line, index) => (
-          <Line {...line} key={`line-${index}`} />
-        ))}
-        {otherLines.map((line, index) => (
-          <Line {...line} key={`other-lines-${index}`} />
+          <Line {...line} key={`line-${index}`} position="absolute" />
         ))}
       </>
     );

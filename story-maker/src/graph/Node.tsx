@@ -1,17 +1,20 @@
 import React, { FunctionComponent } from "react";
-import classnames from "classnames";
-import { Node, NodeType } from "../types";
+import { Node, NodeTracker, LineCoordinates } from "../types";
 
 import DraggableDiv from "./DraggableDiv";
 import NodeAdder from "./NodeAdder";
-import NodeTypeButton from "./NodeTypeButton";
+import Connector from "./Connector";
+import NodeTypes from "./NodeTypes";
 
 interface NodeProps {
   node: Node;
+  nodeTracker?: NodeTracker;
+  nodeTrackers: NodeTracker[];
   startNode: boolean;
   updateNode(node: Node): void;
   removeNode(node: Node): void;
   addOption(nodeId: string): void;
+  connectToOption(node: Node, optionId: string): void;
   addOrUpdateNodeTracker(
     id: string,
     type: "Node" | "StoryOption",
@@ -23,6 +26,9 @@ interface NodeProps {
 
   x: number;
   y: number;
+  drawLine(lineCoordinates: LineCoordinates): void;
+  stopDrawingLine(): void;
+  drawing: boolean;
 }
 
 const NodeComponent: FunctionComponent<NodeProps> = ({
@@ -33,23 +39,39 @@ const NodeComponent: FunctionComponent<NodeProps> = ({
   x,
   y,
   addOrUpdateNodeTracker,
-  startNode
-}) => {
-  const updateType = (type: NodeType) => updateNode({ ...node, type });
-  return (
-    <DraggableDiv
-      x={x}
-      y={y}
-      onUpdatePosition={(updatedX, updatedY, width, height) =>
-        addOrUpdateNodeTracker(
-          node.id,
-          "Node",
-          updatedX,
-          updatedY,
-          width,
-          height
-        )
+  nodeTracker,
+  nodeTrackers,
+  startNode,
+  connectToOption,
+  drawLine,
+  stopDrawingLine,
+  drawing
+}) => (
+  <DraggableDiv
+    x={x}
+    y={y}
+    onUpdatePosition={(updatedX, updatedY, width, height) =>
+      addOrUpdateNodeTracker(node.id, "Node", updatedX, updatedY, width, height)
+    }
+  >
+    <Connector
+      drawFrom="bottom"
+      drawLine={drawLine}
+      stopDrawingLine={stopDrawingLine}
+      drawing={drawing}
+      nodeTrackers={nodeTrackers}
+      nodeTracker={
+        nodeTracker || {
+          x: 0,
+          y: 0,
+          width: 0,
+          height: 0,
+          id: node.id,
+          type: "Node"
+        }
       }
+      canCollideWith="StoryOption"
+      onCollision={optionId => connectToOption(node, optionId)}
     >
       <div className="node">
         <textarea
@@ -57,27 +79,7 @@ const NodeComponent: FunctionComponent<NodeProps> = ({
           value={node.statement}
           onChange={e => updateNode({ ...node, statement: e.target.value })}
         />
-        <div className="node-type--wrapper">
-          {!startNode && (
-            <NodeTypeButton
-              type="Win"
-              currentType={node.type}
-              updateType={updateType}
-            />
-          )}
-          <NodeTypeButton
-            type="Normal"
-            currentType={node.type}
-            updateType={updateType}
-          />
-          {!startNode && (
-            <NodeTypeButton
-              type="Death"
-              currentType={node.type}
-              updateType={updateType}
-            />
-          )}
-        </div>
+        <NodeTypes updateNode={updateNode} node={node} startNode={startNode} />
         {node.type === "Normal" && (
           <NodeAdder onClick={() => addOption(node.id)} />
         )}
@@ -91,8 +93,7 @@ const NodeComponent: FunctionComponent<NodeProps> = ({
           </button>
         )}
       </div>
-    </DraggableDiv>
-  );
-};
-
+    </Connector>
+  </DraggableDiv>
+);
 export default NodeComponent;

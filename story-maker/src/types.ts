@@ -23,13 +23,22 @@ export interface Story {
   options: StoryOption[];
 }
 
+export type NodeTrackerType = "Node" | "StoryOption";
+
 export interface NodeTracker {
   id: string;
-  type: "Node" | "StoryOption";
+  type: NodeTrackerType;
   x: number;
   y: number;
   width: number;
   height: number;
+}
+
+export interface LineCoordinates {
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
 }
 
 export type Verb = "taste" | "touch" | "smell" | "look" | "listen";
