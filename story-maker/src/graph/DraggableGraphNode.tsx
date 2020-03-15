@@ -45,10 +45,6 @@ class DraggableGraphNode extends React.Component<
         let biggestY = acc.biggestY;
         let height = acc.height;
 
-        if (next.x >= biggestX) {
-          biggestX = next.x;
-        }
-
         if (next.y >= biggestY) {
           biggestY = next.y;
           height = next.height;
