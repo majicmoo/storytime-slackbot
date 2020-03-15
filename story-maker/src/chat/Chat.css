@@ -19,3 +19,48 @@
     border-right-color: transparent;
   }
 }
+
+.human-statement,
+.bot-statement {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.history-book {
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+
+  background: #3c3138;
+  color: white;
+  border-radius: 10px 10px 0 0;
+  padding-top: 10px;
+  text-align: left;
+}
+
+.current-node {
+  background-color: #b33566;
+  margin-bottom: 0;
+  padding: 10px;
+}
+
+.history-book--inner {
+  overflow-y: auto;
+}
+
+.chat {
+  padding: 0 40px;
+}
+
+.chat--input {
+  width: 100%;
+  border: 0;
+  box-sizing: border-box;
+  padding: 10px;
+  color: white;
+  background-color: #ff91bc;
+  font-size: 2rem;
+  border-radius: 0 0 10px 10px;
+}

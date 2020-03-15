@@ -30,16 +30,6 @@ class Narrator {
   };
 
   private handleMatch = (verb: Verb, noun: StoryOption): Node | undefined => {
-    const nextNodeOpt = this.getNextNode(verb, noun);
-
-    // if (nextNodeOpt === undefined) {
-    //   return `"You can't do that to ${aOrAn(noun.item)} ${noun.item}."`;
-    // }
-
-    return nextNodeOpt;
-  };
-
-  private getNextNode = (verb: Verb, noun: StoryOption): Node | undefined => {
     switch (verb) {
       case "listen":
         return this.findNounById(noun.listenId);
