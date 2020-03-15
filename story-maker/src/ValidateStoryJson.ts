@@ -1,11 +1,14 @@
 export const validate = (json: any) => {
-  console.log(json);
   validateString(json.title);
   validateArray(json.nodes);
   validateArray(json.options);
 
   json.nodes.forEach(validateNode);
   json.options.forEach(validateOption);
+
+  if (json.nodes.length === 0) {
+    throw new Error("Must be at least one node");
+  }
 };
 
 const validateNode = (node: any) => {

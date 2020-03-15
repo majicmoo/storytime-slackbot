@@ -37,20 +37,21 @@ interface AppState {
   };
 }
 
+const firstNodeId = "first-node";
+const initState: AppState = {
+  tab: "graph",
+  story: {
+    title: "",
+    nodes: [{ statement: "", type: "Normal", optionIds: [], id: firstNodeId }],
+    options: []
+  },
+  nodeTracker: [],
+  showLine: false,
+  lineCoordinates: { x1: 0, y1: 0, x2: 0, y2: 0 }
+};
+
 class App extends React.Component<{}, AppState> {
-  public state: AppState = {
-    tab: "graph",
-    story: {
-      title: "",
-      nodes: [
-        { statement: "", type: "Normal", optionIds: [], id: "first-node" }
-      ],
-      options: []
-    },
-    nodeTracker: [],
-    showLine: false,
-    lineCoordinates: { x1: 0, y1: 0, x2: 0, y2: 0 }
-  };
+  public state: AppState = initState;
 
   private updateTab = (tab: Tab) => this.setState({ tab });
   private updateTitle = (title: string) =>
@@ -112,36 +113,53 @@ class App extends React.Component<{}, AppState> {
     this.setState({ showLine: true, lineCoordinates });
   private stopDrawingLine = () => this.setState({ showLine: false });
 
+  private reset = () => {
+    if (window.confirm("Are you sure you want to start again?")) {
+      const firstTrackedNode = this.state.nodeTracker.find(
+        n => n.id === firstNodeId
+      );
+      this.setState({
+        ...initState,
+        nodeTracker: firstTrackedNode ? [firstTrackedNode] : []
+      });
+    }
+  };
+
   public render() {
     const { tab, story, nodeTracker, showLine, lineCoordinates } = this.state;
 
     return (
       <div className="App">
-        <div className="tab-switcher">
-          <Switcher
-            tab="graph"
-            update={this.updateTab}
-            icon="fas fa-sitemap"
-            currentTab={tab}
-          />
-          <Switcher
-            tab="json"
-            update={this.updateTab}
-            icon="far fa-file"
-            currentTab={tab}
-          />
-          <Switcher
-            tab="chat"
-            update={this.updateTab}
-            icon="fas fa-robot"
-            currentTab={tab}
-          />
-          <Switcher
-            tab="info"
-            update={this.updateTab}
-            icon="fas fa-info"
-            currentTab={tab}
-          />
+        <div className="navbar">
+          <div className="tab-switcher">
+            <Switcher
+              tab="graph"
+              update={this.updateTab}
+              icon="fas fa-sitemap"
+              currentTab={tab}
+            />
+            <Switcher
+              tab="json"
+              update={this.updateTab}
+              icon="far fa-file"
+              currentTab={tab}
+            />
+            <Switcher
+              tab="chat"
+              update={this.updateTab}
+              icon="fas fa-robot"
+              currentTab={tab}
+            />
+            <Switcher
+              tab="info"
+              update={this.updateTab}
+              icon="fas fa-info"
+              currentTab={tab}
+            />
+          </div>
+          <button className="reset" title="reset" onClick={this.reset}>
+            <i className="fas fa-undo-alt" />
+          </button>
         </div>
 
         <div className={tab === "graph" ? "" : "tab--hidden"}>
