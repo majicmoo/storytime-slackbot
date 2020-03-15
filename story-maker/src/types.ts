@@ -42,3 +42,4 @@ export interface LineCoordinates {
 }
 
 export type Verb = "taste" | "touch" | "smell" | "look" | "listen";
+export const VERBS: Verb[] = ["taste", "touch", "smell", "look", "listen"];
