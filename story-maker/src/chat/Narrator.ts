@@ -6,7 +6,7 @@ class Narrator {
 
   public handleNonMatch = (response: string): string => {
     if (response.includes("help")) {
-      return "TODO: helpful message.";
+      return "Try interacting with an item e.g. touch bag or smell tomato.";
     }
 
     if (response.includes("look around")) {
