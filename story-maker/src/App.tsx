@@ -178,6 +178,7 @@ class App extends React.Component<{}, AppState> {
             <a
               className="link"
               target="_blank"
+              rel="noopener noreferrer"
               href="https://github.com/majicmoo/storytime-slackbot"
             >
               <i className="fab fa-github" />

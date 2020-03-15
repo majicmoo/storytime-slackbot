@@ -69,6 +69,7 @@
   width: 100%;
   max-width: 100%;
   padding: 10px;
+  box-sizing: border-box;
 }
 
 .valid-checker {
@@ -88,4 +89,29 @@
 .link {
   color: #ff91bc;
   font-size: 1.5rem;
+}
+
+.json-button-export {
+  font-size: 1.5rem;
+  font-size: 1.5rem;
+  color: #ff91bc;
+
+  border: none;
+  background: none;
+}
+
+.json-button-export:hover {
+  color: #ff6fa7;
+}
+
+.json-top-bar {
+  display: flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.export-wrapper {
+  color: #ff91bc;
 }
