@@ -13,7 +13,7 @@ class Narrator {
       return this.lookAroundDescription();
     }
 
-    return "I don't understand.";
+    return "You cannot do that. Maybe try asking to 'look around' if you are stuck.";
   };
 
   public getNext = (response: string): Node | undefined => {
@@ -59,10 +59,13 @@ class Narrator {
     this.stuffToDo().find(s => words.includes(s.item));
 
   private lookAroundDescription = (): string => {
-    const items = this.stuffToDo()
-      .map(stuff => `${aOrAn(stuff.item)} ${stuff.item}`)
-      .join(" and ");
-    return `You can see ${items}.`;
+    const items = this.stuffToDo().map(
+      stuff => `${aOrAn(stuff.item)} ${stuff.item}`
+    );
+    if (items.length === 0) {
+      return "There is nothing to look at.";
+    }
+    return `You can see ${items.join(" and ")}.`;
   };
 }
 

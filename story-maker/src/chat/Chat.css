@@ -64,3 +64,7 @@
   font-size: 2rem;
   border-radius: 0 0 10px 10px;
 }
+
+.chat--input::placeholder {
+  color: #ffffffa6;
+}

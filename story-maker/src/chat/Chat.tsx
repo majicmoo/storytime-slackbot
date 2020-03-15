@@ -86,7 +86,9 @@ class Chat extends React.Component<ChatProps, ChatState> {
                     "current-node": i + 1 === history.length
                   })}
                 >
-                  {botStatement}
+                  {botStatement === ""
+                    ? "There is no text inputted on this node, please update the story!"
+                    : botStatement}
                 </p>
               </Fragment>
             ))}
@@ -95,6 +97,7 @@ class Chat extends React.Component<ChatProps, ChatState> {
 
         <input
           value={response}
+          placeholder="Type a command e.g. look at book"
           className="chat--input"
           onChange={e =>
             this.setState({ response: e.target.value, otherMessage: "" })
