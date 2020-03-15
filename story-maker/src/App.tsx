@@ -22,9 +22,10 @@ import {
 } from "./StoryUpdater";
 import { removeNodeFromTracker } from "./NodeTrackerHelper";
 import Chat from "./chat/Chat";
+import Switcher, { Tab } from "./Switcher";
 
 interface AppState {
-  tab: "graph" | "json" | "chat";
+  tab: Tab;
   story: Story;
   nodeTracker: NodeTracker[];
   showLine: boolean;
@@ -51,8 +52,7 @@ class App extends React.Component<{}, AppState> {
     lineCoordinates: { x1: 0, y1: 0, x2: 0, y2: 0 }
   };
 
-  private updateTab = (tab: "graph" | "json" | "chat") =>
-    this.setState({ tab });
+  private updateTab = (tab: Tab) => this.setState({ tab });
   private updateTitle = (title: string) =>
     this.setState({ story: { ...this.state.story, title } });
   private updateNode = (node: Node) => {
@@ -118,28 +118,32 @@ class App extends React.Component<{}, AppState> {
     return (
       <div className="App">
         <div className="tab-switcher">
-          <button
-            className="switcher"
-            title="graph"
-            onClick={() => this.updateTab("graph")}
-          >
-            <i className="fas fa-sitemap" />
-          </button>
-          <button
-            className="switcher"
-            title="json"
-            onClick={() => this.updateTab("json")}
-          >
-            <i className="far fa-file" />
-          </button>
-          <button
-            className="switcher"
-            title="chat"
-            onClick={() => this.updateTab("chat")}
-          >
-            <i className="fas fa-robot" />
-          </button>
+          <Switcher
+            tab="graph"
+            update={this.updateTab}
+            icon="fas fa-sitemap"
+            currentTab={tab}
+          />
+          <Switcher
+            tab="json"
+            update={this.updateTab}
+            icon="far fa-file"
+            currentTab={tab}
+          />
+          <Switcher
+            tab="chat"
+            update={this.updateTab}
+            icon="fas fa-robot"
+            currentTab={tab}
+          />
+          <Switcher
+            tab="info"
+            update={this.updateTab}
+            icon="fas fa-info"
+            currentTab={tab}
+          />
         </div>
+
         <div className={tab === "graph" ? "" : "tab--hidden"}>
           <GraphTab
             story={story}
@@ -164,6 +168,21 @@ class App extends React.Component<{}, AppState> {
         </div>
         <div className={tab === "chat" ? "" : "tab--hidden"}>
           <Chat story={story} />
+        </div>
+        <div className={tab === "info" ? "" : "tab--hidden"}>
+          <h1>text adventure creator</h1>
+          <p>Create your own text adventure using the graph tab or json tab.</p>
+          <p>Test out in bot tab.</p>
+          <p>Export by copying/downloading json.</p>
+          <div>
+            <a
+              className="link"
+              target="_blank"
+              href="https://github.com/majicmoo/storytime-slackbot"
+            >
+              <i className="fab fa-github" />
+            </a>
+          </div>
         </div>
       </div>
     );

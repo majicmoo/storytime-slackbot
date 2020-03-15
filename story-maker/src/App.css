@@ -52,7 +52,8 @@
   height: 55px;
 }
 
-.switcher:hover {
+.switcher:hover,
+.switcher--selected {
   background-color: #ff6fa7;
 }
 
@@ -82,4 +83,9 @@
 * {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.link {
+  color: #ff91bc;
+  font-size: 1.5rem;
 }
