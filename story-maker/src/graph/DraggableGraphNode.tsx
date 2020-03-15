@@ -1,14 +1,21 @@
 import React, { createRef, RefObject, ReactNode } from "react";
 import classnames from "classnames";
+import { NodeTracker } from "../types";
+import { reduce } from "ramda";
 
-interface DraggableDivProps {
-  x: number;
-  y: number;
+interface DraggableGraphNodeProps {
   children: ReactNode;
   onUpdatePosition(x: number, y: number, width: number, height: number): void;
+  nodeTrackers: NodeTracker[];
 }
 
-interface DraggableDivState {
+interface NextPosition {
+  biggestX: number;
+  biggestY: number;
+  height: number;
+}
+
+interface DraggableGraphNodeState {
   x: number;
   y: number;
   dragging: boolean;
@@ -16,28 +23,54 @@ interface DraggableDivState {
   relY: number;
 }
 
-class DraggableDiv extends React.Component<
-  DraggableDivProps,
-  DraggableDivState
+class DraggableGraphNode extends React.Component<
+  DraggableGraphNodeProps,
+  DraggableGraphNodeState
 > {
   private ref: RefObject<HTMLDivElement> = createRef();
-  constructor(props: DraggableDivProps) {
+  constructor(props: DraggableGraphNodeProps) {
     super(props);
-    this.state = { x: props.x, y: props.y, dragging: false, relX: 0, relY: 0 };
+    this.state = { x: 0, y: 0, dragging: false, relX: 0, relY: 0 };
   }
 
   public componentDidMount() {
-    this.props.onUpdatePosition(
-      this.props.x,
-      this.props.y,
-      this.width(),
-      this.height()
-    );
+    if (this.props.nodeTrackers.length === 0) {
+      this.props.onUpdatePosition(0, 0, this.width(), this.height());
+      return;
+    }
+
+    const { biggestX, biggestY, height } = reduce<NodeTracker, NextPosition>(
+      (acc: NextPosition, next: NodeTracker) => {
+        let biggestX = acc.biggestX;
+        let biggestY = acc.biggestY;
+        let height = acc.height;
+
+        if (next.x >= biggestX) {
+          biggestX = next.x;
+        }
+
+        if (next.y >= biggestY) {
+          biggestY = next.y;
+          height = next.height;
+        }
+
+        return { biggestX, biggestY, height };
+      },
+      { biggestX: 0, biggestY: 0, height: 0 }
+    )(this.props.nodeTrackers);
+
+    const x = biggestX;
+    const y = biggestY + height;
+
+    this.setState({ x, y });
+
+    this.props.onUpdatePosition(x, y, this.width(), this.height());
+    setTimeout(() => this.ref.current?.scrollIntoView());
   }
 
   public componentDidUpdate(
-    props: DraggableDivProps,
-    state: DraggableDivState
+    props: DraggableGraphNodeProps,
+    state: DraggableGraphNodeState
   ) {
     if (this.state.dragging && !state.dragging) {
       document.addEventListener("mousemove", this.drag);
@@ -95,4 +128,4 @@ class DraggableDiv extends React.Component<
   }
 }
 
-export default DraggableDiv;
+export default DraggableGraphNode;

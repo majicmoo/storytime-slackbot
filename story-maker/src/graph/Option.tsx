@@ -1,6 +1,6 @@
 import React from "react";
-import { StoryOption, Verb } from "../types";
-import DraggableDiv from "./DraggableDiv";
+import { StoryOption, Verb, NodeTracker } from "../types";
+import DraggableGraphNode from "./DraggableGraphNode";
 import VerbComponent from "./Verb";
 
 interface OptionProps {
@@ -16,8 +16,7 @@ interface OptionProps {
     height: number
   ): void;
   addNode(option: StoryOption, verb: Verb): void;
-  x: number;
-  y: number;
+  nodeTrackers: NodeTracker[];
 }
 
 class Option extends React.Component<OptionProps> {
@@ -27,15 +26,13 @@ class Option extends React.Component<OptionProps> {
     const {
       option,
       updateOption,
-      x,
-      y,
       addOrUpdateNodeTracker,
-      removeOption
+      removeOption,
+      nodeTrackers
     } = this.props;
     return (
-      <DraggableDiv
-        x={x}
-        y={y}
+      <DraggableGraphNode
+        nodeTrackers={nodeTrackers}
         onUpdatePosition={(updatedX, updatedY, width, height) =>
           addOrUpdateNodeTracker(
             option.id,
@@ -94,7 +91,7 @@ class Option extends React.Component<OptionProps> {
             />
           </div>
         </div>
-      </DraggableDiv>
+      </DraggableGraphNode>
     );
   }
 }

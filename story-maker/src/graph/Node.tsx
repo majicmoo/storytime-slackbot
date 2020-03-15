@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { Node, NodeTracker, LineCoordinates } from "../types";
 
-import DraggableDiv from "./DraggableDiv";
+import DraggableGraphNode from "./DraggableGraphNode";
 import NodeAdder from "./NodeAdder";
 import Connector from "./Connector";
 import NodeTypes from "./NodeTypes";
@@ -24,8 +24,6 @@ interface NodeProps {
     height: number
   ): void;
 
-  x: number;
-  y: number;
   drawLine(lineCoordinates: LineCoordinates): void;
   stopDrawingLine(): void;
 }
@@ -35,8 +33,6 @@ const NodeComponent: FunctionComponent<NodeProps> = ({
   updateNode,
   addOption,
   removeNode,
-  x,
-  y,
   addOrUpdateNodeTracker,
   nodeTracker,
   nodeTrackers,
@@ -45,9 +41,8 @@ const NodeComponent: FunctionComponent<NodeProps> = ({
   drawLine,
   stopDrawingLine
 }) => (
-  <DraggableDiv
-    x={x}
-    y={y}
+  <DraggableGraphNode
+    nodeTrackers={nodeTrackers}
     onUpdatePosition={(updatedX, updatedY, width, height) =>
       addOrUpdateNodeTracker(node.id, "Node", updatedX, updatedY, width, height)
     }
@@ -91,6 +86,6 @@ const NodeComponent: FunctionComponent<NodeProps> = ({
         )}
       </div>
     </Connector>
-  </DraggableDiv>
+  </DraggableGraphNode>
 );
 export default NodeComponent;

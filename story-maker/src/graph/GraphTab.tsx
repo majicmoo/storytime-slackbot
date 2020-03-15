@@ -76,13 +76,11 @@ const GraphTab: FunctionComponent<GraphTabProps> = ({
         connectToOption={connectToOption}
         drawLine={drawLine}
         stopDrawingLine={stopDrawingLine}
-        x={index}
-        y={index}
         startNode={index === 0}
       />
     ))}
 
-    {story.options.map((option, index) => (
+    {story.options.map(option => (
       <Option
         option={option}
         key={option.id}
@@ -90,8 +88,7 @@ const GraphTab: FunctionComponent<GraphTabProps> = ({
         removeOption={removeOption}
         addOrUpdateNodeTracker={addOrUpdateNodeTracker}
         addNode={addNode}
-        x={index}
-        y={index}
+        nodeTrackers={nodeTrackers}
       />
     ))}
     <Lines story={story} nodeTracker={nodeTrackers} />
