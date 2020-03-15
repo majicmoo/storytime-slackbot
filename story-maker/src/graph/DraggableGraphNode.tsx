@@ -7,6 +7,7 @@ interface DraggableGraphNodeProps {
   children: ReactNode;
   onUpdatePosition(x: number, y: number, width: number, height: number): void;
   nodeTrackers: NodeTracker[];
+  id: string;
 }
 
 interface NextPosition {
@@ -36,6 +37,14 @@ class DraggableGraphNode extends React.Component<
   public componentDidMount() {
     if (this.props.nodeTrackers.length === 0) {
       this.props.onUpdatePosition(0, 0, this.width(), this.height());
+      return;
+    }
+
+    const maybeEntry = this.props.nodeTrackers.find(
+      n => n.id === this.props.id
+    );
+    if (maybeEntry !== undefined) {
+      this.setState({ x: maybeEntry.x, y: maybeEntry.y });
       return;
     }
 

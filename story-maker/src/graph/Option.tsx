@@ -32,6 +32,7 @@ class Option extends React.Component<OptionProps> {
     } = this.props;
     return (
       <DraggableGraphNode
+        id={option.id}
         nodeTrackers={nodeTrackers}
         onUpdatePosition={(updatedX, updatedY, width, height) =>
           addOrUpdateNodeTracker(

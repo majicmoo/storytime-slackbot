@@ -43,6 +43,7 @@ const NodeComponent: FunctionComponent<NodeProps> = ({
 }) => (
   <DraggableGraphNode
     nodeTrackers={nodeTrackers}
+    id={node.id}
     onUpdatePosition={(updatedX, updatedY, width, height) =>
       addOrUpdateNodeTracker(node.id, "Node", updatedX, updatedY, width, height)
     }

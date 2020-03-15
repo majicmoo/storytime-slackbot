@@ -23,6 +23,7 @@ import {
 import { removeNodeFromTracker } from "./NodeTrackerHelper";
 import Chat from "./chat/Chat";
 import Switcher, { Tab } from "./Switcher";
+import { validate } from "./ValidateStoryJson";
 
 interface AppState {
   tab: Tab;
@@ -59,6 +60,24 @@ class App extends React.Component<{}, AppState> {
   private updateNode = (node: Node) => {
     this.setState({ story: updateNode(this.state.story, node) });
   };
+
+  componentDidMount() {
+    const story = localStorage.getItem("story");
+
+    if (story) {
+      try {
+        const parsedJson = JSON.parse(story);
+        validate(parsedJson.story);
+        this.setState(parsedJson);
+      } catch (e) {
+        console.log("could not parse story in local storage");
+      }
+    }
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem("story", JSON.stringify(this.state));
+  }
 
   private addOrUpdateNodeTracker = (
     id: string,
